@@ -1,0 +1,56 @@
+上一篇pytest文档2-用例运行规则已经介绍了如何在cmd执行pytest用例，平常我们写代码在pycharm比较多
+写完用例之后，需要调试看看，是不是能正常运行，如果每次跑去cmd执行，太麻烦，所以很有必要学习如何在pycharm里面运行pytest用例
+
+## pycharm运行三种方式 --没学过unittest，看不懂，以后补充
+
+1.以xx.py脚本方式直接执行，当写的代码里面没用到unittest和pytest框架时，并且脚本名称不是以test_开头命名的，此时pycharm会以xx.py脚本方式运行
+
+![](.04pycharm运行pytest_images/0e12ec48.png)
+
+2.当脚本命名为test_xx.py时，用到unittest框架，此时运行代码，pycharm会自动识别到以unittest方式运行
+
+![](.04pycharm运行pytest_images/2d19ae4c.png)
+
+3.以pytest方式运行，需要改该工程设置默认的运行器：file->Setting->Tools->Python Integrated Tools->项目名称->Default test runner->选择py.test
+
+![](.04pycharm运行pytest_images/dec6a5e5.png)
+
+备注：pytest是可以兼容unittest框架代码的
+
+## 在pycharm中运行pytest所需准备
+**import pytest 报错，提示No module named pytest 找不到pytest模块**
+
+路径：文件-设置-项目-python解释器，左上角+号安装pytest
+![](.04pycharm运行pytest_images/b52fe15a.png)
+再执行，可以使用pytest
+![](.04pycharm运行pytest_images/5f9f97c7.png)
+
+## pycharm写pytest代码
+
+代码如下(同文件夹下test_class.py)：
+```
+import pytest
+
+class TestClass:
+        def test_one(self):
+            x = "this"
+            assert 'h' in x
+
+        def test_two(self):
+            x = "hello"
+            assert hasattr(x, 'check')
+
+        def test_three(self):
+            a = "hello"
+            b = "hello world"
+            assert a in b
+
+if __name__ == "__main__":
+    pytest.main('-q test_class.py')
+   
+   ```
+右键运行,测试结果如下：
+![](.04pycharm运行pytest_images/2f41dda2.png)
+运行结果“.F. ”  点是代表测试通过，F是Fail的意思，1 warnings是用于pytest.main(‘-q test_class.py’)里面参数需要传list，多个参数放list就不会有警告了
+
+`pytest.main([‘-q’, ‘test_class.py’])`

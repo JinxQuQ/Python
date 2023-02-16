@@ -1,6 +1,9 @@
-# pytest执行方式
-
-### 在对应路径下进入cmd   --D:\python\Pytest\23230215_2
+# pytest用例运行规则
+* 测试文件以test_开头（以_test结尾也可以）
+* 测试类以Test开头，并且不能带有 init 方法
+* 测试函数以test_开头
+* 断言使用assert
+### pytest执行方式：在对应路径下进入cmd   --D:\python\Pytest\23230215_2
 
 ![](.readme_images/625d652b.png)
 
