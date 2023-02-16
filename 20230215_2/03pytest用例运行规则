@@ -1,0 +1,89 @@
+# pytest执行方式
+
+### 在对应路径下进入cmd   --D:\python\Pytest\23230215_2
+
+![](.readme_images/625d652b.png)
+
+### **查看pytest命令行参数，可以用pytest -h 或pytest --help查看**
+
+![](.readme_images/28a9b770.png)
+
+## python -m
+
+#### **cmd执行pytest用例有三种方法,以下三种方法都可以（均为执行全部用例），一般推荐第一个**
+```
+pytest
+
+py.test
+
+python -m pytest
+```
+如果不带参数，在某个文件夹下执行时，它会查找该文件夹下所有的符合条件的用例（查看用例设计原则）
+
+## 执行用例规则
+#### 执行某个目录下所有的用例
+
+`pytest 文件名/`
+
+![](.03pytest用例运行规则_images/9c72d2b2.png)
+![](.03pytest用例运行规则_images/0ce692b6.png)
+
+#### 执行某一个py文件下用例
+
+`pytest 脚本名称.py`
+
+![](.03pytest用例运行规则_images/0921b981.png)
+
+## -k 按关键字匹配
+
+`pytest 脚本名称.py -k 关键词`
+
+`例如：pytest test_class.py -k TestClass1`
+
+![](.03pytest用例运行规则_images/763baf0e.png)
+
+**这将运行包含与给定字符串表达式匹配的名称的测试，其中包括Python
+使用文件名，类名和函数名作为变量的运算符。** 
+
+## 以下未完全掌握，记录供查询补充：
+
+### 1.按节点运行
+
+每个收集的测试都分配了一个唯一的nodeid，它由模块文件名和后跟说明符组成
+来自参数化的类名，函数名和参数，由:: characters分隔。
+
+#### 运行.py模块里面的某个函数
+
+`pytest test_mod.py::test_func`
+
+#### 运行.py模块里面,测试类里面的某个方法
+
+`pytest test_mod.py::TestClass::test_method`
+
+### 2.标记表达式
+
+`pytest -m slow`
+
+#### 将运行用@ pytest.mark.slow装饰器修饰的所有测试。
+
+### 3.从包里面运行
+
+`pytest —pyargs pkg.testing`
+
+#### 这将导入pkg.testing并使用其文件系统位置来查找和运行测试。
+
+## -x 遇到错误时停止测试
+
+`pytest -x test_class.py`
+
+从运行结果可以看出，本来有5个用例，第二个用例失败后就没继续往下执行了
+![](.03pytest用例运行规则_images/fde17ed2.png)
+![](.03pytest用例运行规则_images/7c5fa6d2.png)
+
+## --maxfail=num 当错误数量达到num时，停止测试
+`pytest （文件名 可加可不加） --maxfail=3`
+
+加文件名：
+![](.03pytest用例运行规则_images/81dd39b0.png)
+不加文件名：
+![](.03pytest用例运行规则_images/41bd94a8.png)
