@@ -1,0 +1,17 @@
+# pytest运行规则：
+## 查找当前目录及其子目录下以test_*.py或*_test.py文件，找到文件后，在文件中找到以test开头函数并执行。
+
+新建一个test_开头的.py文件
+内容如下：
+```
+def func(x):
+    return x +1
+
+def test_answer():
+    assert func(3)==5
+```
+![](.pytest初体验_images/6252d0c0.png)
+
+保存对应.py文件，在对应文件路径下打开cmd，输入pytest，现象如下
+![](.pytest初体验_images/41342589.png)
+

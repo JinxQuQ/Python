@@ -1,0 +1,31 @@
+# pip install -U pytest
+
+安装pytest一直失败
+![](.安装pytest_images/753b3cda.png)
+需要升级pip版本
+![](.安装pytest_images/589887ec.png)
+
+### 默认升级语句：**_pip install --upgrade pip_**
+
+_执行后一直下载失败
+解决方法：采用国内镜像下载模块
+**pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python**
+我这里使用的是清华大学的镜像，如果安装中途还是报错，多执行几次该命令，直到成功_
+
+2023年2月15日记录：
+一直重复使用**_pip install --upgrade pip_**
+大概三四次，升级成功了
+![](.安装pytest_images/ce71be83.png)
+
+继续安装pytest成功了
+### **_pip install -U pytest_**
+
+![](.安装pytest_images/7dac8ec0.png)
+
+
+查看pytest版本
+
+### **pip show pytest**
+
+![](.安装pytest_images/49b1eaec.png)
+也可以**pytest —version**查看安装的版本
