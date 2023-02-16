@@ -1,0 +1,6 @@
+pytest执行方式
+在对应路径下进入cmd--D:\python\Pytest\23230215_2
+
+查看pytest命令行参数，可以用pytest -h 或pytest —help查看
+
+![img.png](img.png)
