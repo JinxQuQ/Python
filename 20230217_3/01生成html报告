@@ -1,0 +1,33 @@
+pytest-HTML是一个插件，pytest用于生成测试结果的HTML报告。兼容Python 2.7,3.6
+
+### 1.安装插件：
+
+`pip install pytest-html`
+
+![](.01生成html报告_images/2e05e32a.png)
+
+* github上源码地址【https://github.com/pytest-dev/pytest-html】
+
+* 执行方法：`$ pytest —html=report.html`
+
+### 2.执行报告
+
+打开cmd，cd到需要执行pytest用例的目录，执行指令：`pytest —html=report.html`
+![](.01生成html报告_images/360d955a.png)
+执行完之后，在当前目录会生成一个report.html的报告文件，显示效果如下
+![](.01生成html报告_images/cfa22625.png)
+
+### 3.指定报告路径
+
+1.直接执行”pytest —html=report.html”生成的报告会在当前脚本的同一路径，如果想指定报告的存放位置，放到当前脚本的同一目录下的report文件夹里
+
+`pytest --html=./report/report.html`
+![](.01生成html报告_images/5d78fcc0.png)
+![](.01生成html报告_images/bf4f0936.png)
+
+## 拓展：
+
+### 显示选项
+
+默认情况下，“ 结果”表中的所有行都将被展开，但具测试通过的行除外Passed。\
+可以使用查询参数自定义此行为：?collapsed=Passed,XFailed,Skipped。

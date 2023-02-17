@@ -1,0 +1,25 @@
+[pytest实现异常用例截图并在allure报告中查看](https://zhuanlan.zhihu.com/p/533635951)\
+[微信公众号-悠悠自动化测试08HTML报告+截图+重跑](https://mp.weixin.qq.com/s?__biz=MzI5ODU1MzkwMA==&mid=2247484872&idx=1&sn=8fe608cf3085105009544ab363b5bb49&chksm=eca5428bdbd2cb9d71274afb994cdd4321f3bdaa51066816f59627ced53a4d914233f67616e5&cur_album_id=1500392973518323716&scene=189#wechat_redirect)
+
+前言：`--self-contained-html`的截图命令好像有没有都一样，没有这个命令也有具体的错误，有这个命令也没有图片生成，但是有显示错误（看另一篇文章说生成的是css文件）
+
+测试文件：`conftest.py`  `test_01.py`  `test_02.py`
+
+* 需要安装selenium的module包
+
+* 需要安装allure   --  pip install pytest-allure
+
+
+
+执行命令：`pytest --html=./report/reportcut1.html --self-contained-html`
+
+![](.02conftest失败截图报告+重跑_images/ff43aeda.png)
+
+报告结果：
+![](.02conftest失败截图报告+重跑_images/c7596cb0.png)
+
+
+### 重跑（也没看出效果）：
+
+`pytest -rerun1 --html=./report/reportcut2.html --self-contained-html`
+![](.02conftest失败截图报告+重跑_images/13c4165c.png)
