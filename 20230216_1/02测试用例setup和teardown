@@ -5,6 +5,9 @@ https://mp.weixin.qq.com/s?__biz=MzI5ODU1MzkwMA==&mid=2247484838&idx=1&sn=ffb899
 当然还有更高级一点的setupClass和teardownClass，需配合@classmethod装饰器一起使用，在做selenium自动化的时候，它的效率尤为突然，可以只启动一次浏览器执行多个用例。\
 pytest框架也有类似于setup和teardown的语法，并且还不止这四个。
 
+* setup：在测试函数或类之前执行，完成准备工作，例如数据库链接、测试数据、打开文件等。
+* teardown：在测试函数或类之后执行，完成收尾工作，例如断开数据库链接、回收内存资源等。
+
 ## 用例运行级别
 1. 模块级（setup_module/teardown_module）开始于模块始末，全局的
 2. 函数级（setup_function/teardown_function）只对函数用例生效（不在类中）
