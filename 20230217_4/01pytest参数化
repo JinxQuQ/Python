@@ -1,0 +1,27 @@
+## pytest.mark.parametrize装饰器可以实现测试用例参数化
+[参数化parametrize](https://mp.weixin.qq.com/s?__biz=MzI5ODU1MzkwMA==&mid=2247484875&idx=1&sn=db73be56991fc0645b75597e46ce654b&chksm=eca54288dbd2cb9e47c0effe5f5634d5b70b8b6506eb86e1a2f9a9d0b5ec36769912d6ce25fb&cur_album_id=1500392973518323716&scene=189#wechat_redirect)
+
+![](.01pytest参数化_images/abf8ee7d.png)
+
+运行结果如下：
+
+![](.01pytest参数化_images/0f2e3912.png)
+
+
+### 它也可以标记单个测试实例在参数化，例如使用内置的mark.xfail，标记为失败的用例显示xfailed
+
+![](.01pytest参数化_images/ab564253.png)
+![](.01pytest参数化_images/9711577e.png)
+
+（个人理解：和jmeter中的断言一样，不是逻辑错误，只是参数和预设的对不上，所以按照xfailed处理）
+
+
+### 若要获得多个参数化参数的所有组合，可以堆叠参数化装饰器
+
+![](.01pytest参数化_images/ded398f2.png)
+
+这将运行测试，参数设置为x＝0／y＝2，x＝1／y＝2，x＝0／y＝3，x＝1／y＝3的组合参数。
+
+![](.01pytest参数化_images/bc83cf7d.png)
+
+#### 不太懂有什么用，但是个人猜想是可以用于有多个选项的用例，进而猜想是否可以用于流程表单中多条件组合？
