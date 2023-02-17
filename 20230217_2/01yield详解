@@ -1,0 +1,59 @@
+## yield放在被装饰的方法中，可以类比为teardown使用，即在所需内容运行结束后使用
+## fixture的scope范围什么都不填，默认为function，若修改为module，则作用单位为整个.py文件
+
+### yield结合fixture的默认范围
+
+仅1和3调用了：
+
+![](.01yield详解_images/66141452.png)
+![](.01yield详解_images/ead4e3bd.png)
+
+结果为：
+![](.01yield详解_images/cdd10731.png)
+
+### yield结合module（fixture的作用范围）
+
+设置fixture的scope范围为module，即对整个.py文件生效
+![](.01yield详解_images/9781adf6.png)
+那么，虽然1和3都调用了，但是fixture只会在整个.py文件都执行结束后调用
+![](.01yield详解_images/cf8901b4.png)
+
+#### 如果yield遇到执行过程中的用例异常，不影响它继续执行（如test_yield2.py）
+
+![](.01yield详解_images/7699985c.png)
+如果在setup就异常了，那么就不会去执行yield后面的teardown内容了
+
+## 拓展内容：
+
+### yield也可以配合with语句使用，以下是官方文档给的案例
+
+```
+import smtplib
+import pytest
+
+@pytest.fixture(scope="module")
+def smtp():
+    with smtplib.SMTP("smtp.gmail.com") as smtp:
+        yield smtp  # provide the fixture value
+```
+
+### addfinalizer终结函数
+### 除了yield可以实现teardown,在request-context对象中注册addfinalizer方法也可以实现终结函数。如以下官方案例：
+```
+import smtplib
+import pytest
+
+@pytest.fixture(scope="module")
+def smtp_connection(request):
+    smtp_connection = smtplib.SMTP("smtp.gmail.com", 587, timeout=5)
+    def fin():
+        print("teardown smtp_connection")
+        smtp_connection.close()
+    request.addfinalizer(fin)
+    return smtp_connection  # provide the fixture value
+```
+
+### yield和addfinalizer方法都是在测试完成后呼叫相应的代码。但是addfinalizer不同的是：
+
+1. 他可以注册多个终结函数。
+2. 这些终结方法总是会被执行，无论在之前的setup code有没有抛出错误。这个方法对于正确关闭所有的fixture创建的资源非常便利，即使其一在创建或获取时失败
