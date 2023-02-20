@@ -1,0 +1,49 @@
+### 前言
+
+pytest可以支持自定义标记，自定义标记可以把一个web项目划分多个模块，然后指定模块名称执行。app自动化的时候，如果想android和ios公用一套代码时，
+也可以使用标记功能，标明哪些是ios用例，哪些是android的，运行代码时候指定mark名称运行就可以
+
+### webtest标记
+以下用例，标记test_send_http()为webtest
+![](.01mark标记_images/f1a8a77a.png)
+
+* 只运行用webtest标记的测试，cmd运行的时候，加个-m 参数，指定参数值webtest
+
+    `pytest -v -m webtest`
+
+* 如果不想执行标记webtest的用例，那就用”not webtest”
+
+    `pytest -v -m "not webtest"`必须是英文双引号
+![](.01mark标记_images/181b5b99.png)
+
+#### 实测：在pycharm中以"test_server.py::TestClass::test_method"，"-m=webtest"等方式指定运行某些用例均无效，用cmd运行有效
+
+### -v 指定的函数节点id
+
+例如指定执行某个文件中的类中的方法：`pytest -v test_server.py::TestClass::test_method`
+
+![](.01mark标记_images/5887967d.png)
+![](.01mark标记_images/c4164245.png)
+
+也可以指定某个类下方的所有方法：`pytest -v test_server.py::TestClass`
+
+![](.01mark标记_images/75b9d577.png)
+![](.01mark标记_images/d9834067.png)
+
+也能选择多个节点运行，多个节点中间空格隔开：`pytest -v test_server.py::TestClass test_server.py::test_send_http`
+
+### -k 匹配用例名称
+可以使用-k命令行选项指定在匹配用例名称的表达式
+
+如图，仅有一个用例名称符合筛选，其他的未被选择即不参与执行：
+![](.01mark标记_images/c3d676c8.png)
+
+您也可以运行所有的测试，根据用例名称排除掉某些用例：
+`pytest -k “not send_http” -v`
+
+![](.01mark标记_images/87211ab6.png)
+
+也可以同时选择匹配 “http” 和“quick”
+`pytest -k “http or quick” -v`
+
+![](.01mark标记_images/a3d00e27.png)

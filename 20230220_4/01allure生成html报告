@@ -82,7 +82,7 @@ allure的版本目前有2个，从github上看，allure1不再被支持，请考
             
         `allure serve ./result `
 
-　　方法二：从结果生成报告，这是一个启动tomcat的服务，需要两个步骤
+　　方法二：从结果生成报告，这是一个启动tomcat的服务，需要两个步骤(并且前面需要执行一遍收集测试结果的命令`pytest [测试文件] -s -q --alluredir=./result --clean-alluredir`)
 
         生成报告：
             allure generate ./result -o ./report --clean   (注意：--clean用来清除之前已生成的报告)
