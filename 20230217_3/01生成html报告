@@ -8,11 +8,11 @@ pytest-HTML是一个插件，pytest用于生成测试结果的HTML报告。兼�
 
 * github上源码地址【https://github.com/pytest-dev/pytest-html】
 
-* 执行方法：`$ pytest —html=report.html`
+* 执行方法：`$ pytest --html=report.html`
 
 ### 2.执行报告
 
-打开cmd，cd到需要执行pytest用例的目录，执行指令：`pytest —html=report.html`
+打开cmd，cd到需要执行pytest用例的目录，执行指令：`pytest --html=report.html`
 ![](.01生成html报告_images/360d955a.png)
 执行完之后，在当前目录会生成一个report.html的报告文件，显示效果如下
 ![](.01生成html报告_images/cfa22625.png)

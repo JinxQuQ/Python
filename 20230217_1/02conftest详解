@@ -5,6 +5,11 @@
 
 ![](.02conftest_images/1bebb26a.png)
 
+## 简述：
+1. 首先， conftest.py 的文件名称是固定的， pytest 会自动识别该文件，我们可以理解成一个专门存放 fixture 的配置文件。
+2. 一个工程下可以建多个 conftest.py 文件，一般我们都是在工程根目录下设置的 conftest 文件，这样会起到一个全局的作用。 我们也可以在不同的子目录下放 conftest.py ，这样作用范围只能在该层级的子目录下生效。
+3. pytest在执行 test_demo.py 文件之前，会先执行 conftest.py 文件中的方法，然后在执行 test_demo.py 文件。
+
 
 如果有多个.py的文件都需要调用这个登陆功能的话，那就不能把登陆写到用例里面去了。\
 **此时应该要有一个配置文件，单独管理一些预置的操作场景，pytest里面默认读取conftest.py里面的配置**

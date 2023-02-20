@@ -1,0 +1,13 @@
+这是一个快速指南，介绍如何在不同情况下跳过模块中的测试
+
+1.无条件地跳过模块中的所有测试：
+
+`pytestmark = pytest.mark.skip(“all tests still WIP”)`
+
+2.根据某些条件跳过模块中的所有测试
+
+`pytestmark = pytest.mark.skipif(sys.platform == “win32”, “tests for linux → only”`
+
+3.如果缺少某些导入，则跳过模块中的所有测试
+
+`pexpect = pytest.importorskip(“pexpect”)`

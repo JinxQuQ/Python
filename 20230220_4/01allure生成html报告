@@ -1,0 +1,97 @@
+### 前言
+
+allure是一个report框架,支持java的Junit/testng等框架,当然也可以支持python的pytest框架，也可以集成到Jenkins上展示高大上的报告界面。
+
+#### 环境准备
+
+1. python3.6
+2. windows环境
+3. pycharm
+4. pytest-allure-adaptor
+5. allure2.7.0
+6. java1.8
+
+
+### pytest-allure-adaptor下载
+
+pip安装pytest-allure-adaptor,github地址`https://github.com/allure-framework/allure-pytest`
+
+`pip3 install pytest-allure-adaptor`
+
+如果下载失败就多下几次，网络问题
+![](.01allure生成html报告_images/0ae6b6d2.png)
+
+### ！！！此处有坑！！！
+
+这里下载的pytest-allure-adaptor是1.7.10版本的，但是这个里面对应的很多文件路径在python3.10中都已经修改了，所以会导致之后生成xml报告的时候，许多文件报错![](.01allure生成html报告_images/eb6001e7.png)
+
+### 解决办法
+卸载重装（安装完allure2之后再进行这些，maybe）
+
+`1.pip uninstall pytest-allure-adaptor`
+
+`2.pip install allure-pytest`
+
+![](.01allure生成html报告_images/b818d087.png)
+之后再查看对应目录，可以看到已经生成了report文件夹
+![](.01allure生成html报告_images/d315b5e6.png)
+
+### 安装 Command Tool
+
+allure的版本目前有2个，从github上看，allure1不再被支持，请考虑使用allure2  https://github.com/allure-framework/allure2替代
+下载地址：https://github.com/allure-framework/allure2/releases
+![](.01allure生成html报告_images/539362d8.png)
+![](.01allure生成html报告_images/723d0198.png)
+
+#### 配置环境变量
+下载好之后，解压到运行pytest的目录下
+
+![](.01allure生成html报告_images/25bf70a0.png)
+
+打开\allure-2.7.0\bin文件夹，会看到allure.bat文件，讲此路径设置为系统环境变量path下，这样cmd任意目录都能执行了
+![](.01allure生成html报告_images/e51813bd.png)
+
+## 运行allure2
+引用内容（文2的参考性高于文1，文1中的运行部分的操作很多都不行）：
+
+1.[微信公众号-allure2生成html报告](https://mp.weixin.qq.com/s?__biz=MzI5ODU1MzkwMA==&mid=2247484896&idx=1&sn=af438636daaaf82836c1031c115902e9&chksm=eca542a3dbd2cbb53f09f5aebd021cd9032736770075147f295171179ea8e0950679770c3f92&cur_album_id=1500392973518323716&scene=189#wechat_redirect)
+
+2.[python自动化之使用allure生成测试报告](https://www.cnblogs.com/feng0815/p/13792188.html)
+
+依照操作：
+![](.01allure生成html报告_images/f6bc4194.png)
+文2关键内容节选：
+![](.01allure生成html报告_images/160bfc3d.png)
+
+#### 运行：
+
+在测试执行期间收集结果
+
+    pytest [测试文件] -s -q --alluredir=./result --clean-alluredir
+        * --alluredir这个选项，用于指定存储测试结果的路径 
+        * --clean-alluredir 这个选项用来清除之前生成的结果
+    备注：
+        1.测试文件不写，即为执行该目录下所有的测试文件
+        2.--alluredir后方的路径，不管写什么，确实会按照对应路径生成，但是查看时，依然会从c盘中生成的报告查看（暂未弄明白机制）
+如图：![](.01allure生成html报告_images/9382b132.png)![](.01allure生成html报告_images/a1f11017.png)
+
+
+#### 查看测试报告：
+
+　　方法一：测试完成后查看实际报告，在线看报告，会直接打开默认浏览器展示当前报告
+            
+        `allure serve ./result `
+
+　　方法二：从结果生成报告，这是一个启动tomcat的服务，需要两个步骤
+
+        生成报告：
+            allure generate ./result -o ./report --clean   (注意：--clean用来清除之前已生成的报告)
+        打开报告：
+            allure open -h 127.0.0.1 -p 8883 ./report   （该方法直接生成一个tomcat服务，可远程访问）
+        备注：
+            方法二疑似是打开的路径是从对应文件夹路径下打开而非C盘下（不确定），如下图：
+![](.01allure生成html报告_images/e698bc52.png)
+
+结果如图所示（直接点击html文件是打不开的，只会显示loading数据）：
+![](.01allure生成html报告_images/8d264a9a.png)
+直接点击打开效果如图：![](.01allure生成html报告_images/592e24c7.png)

@@ -1,0 +1,22 @@
+## 1.addoption的作用：
+
+命令行参数是根据命令行选项将不同的值传递给测试函数，比如平常在cmd执行”pytest —html=report.html”,这里面的”—html=report.html“就是从命令行传入的参数
+对应的参数名称是html，参数值是report.html
+
+## 2.addoption的用法
+
+首先需要在contetest.py添加命令行选项,命令行传入参数”--cmdopt“, 用例如果需要用到从命令行传入的参数，就调用cmdopt函数
+数据传输逻辑顺序如下：
+![](.01命令行传参addoption_images/e9a47ff9.png)
+![](.01命令行传参addoption_images/5b5c44af.png)
+default为默认参数，不带参数的话，传到test_sample.py的内容就是default中的type1，即最终会输出frist
+![](.01命令行传参addoption_images/2ba39c85.png)
+
+## 3.带参数使用addoption
+
+进入cmd，输入`pytest -s test_sample.py --cmdopt=type2`
+![](.01命令行传参addoption_images/e3027e8f.png)
+此时默认的type1没有被采用，输出的是type2结果的second
+
+另一种写法，不带等于号也可以
+![](.01命令行传参addoption_images/8436bb88.png)

@@ -1,0 +1,17 @@
+### 前言：
+
+断言是写自动化测试基本最重要的一步，一个用例没有断言，就失去了自动化测试的意义了。什么是断言呢？
+简单来讲就是实际结果和期望结果去对比，符合预期那就测试pass，不符合预期那就测试 failed
+
+文章地址：真看不懂操，作为储备知识以供查阅吧
+
+[assert断言](https://mp.weixin.qq.com/s?__biz=MzI5ODU1MzkwMA==&mid=2247484881&idx=1&sn=5c660a5d748b4be6f0832be2766dfac1&chksm=eca54292dbd2cb84bd9e8d9aaea232882604c71f5a1da39f0ef6f357a41839ad363f2dc2a136&cur_album_id=1500392973518323716&scene=189#wechat_redirect)
+
+[python中的异常](https://blog.csdn.net/weixin_37988176/article/details/109368316)
+### pytest里面断言实际上就是python里面的assert断言方法，常用的有以下几种
+
+1. assert  xx  判断xx为真
+2. assert not xx 判断xx不为真
+3. assert a in b  判断b包含a
+4. assert a == b 判断a等于b
+5. assert a != b  判断a不等于b
