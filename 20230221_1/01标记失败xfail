@@ -1,0 +1,33 @@
+## 前言
+
+* 当用例a失败的时候，如果用例b和用例c都是依赖于第一个用例的结果，那可以直接跳过用例b和c的测试，直接给他标记失败xfail\
+* 用到的场景，登录是第一个用例，登录之后的操作b是第二个用例，登录之后操作c是第三个用例，很明显三个用例都会走到登录。\
+* 如果登录都失败了，那后面2个用例就没测试必要了，直接跳过，并且标记为失败用例，这样可以节省用例时间。
+
+
+## 用例设计
+
+### pytest里面用xfail标记用例为失败的用例，可以直接跳过。
+
+#### 实现基本思路：
+
+* 把登录写为前置操作
+* 对登录的账户和密码参数化，参数用canshu = [{“user”:”amdin”, “psw”:”111”}]表示
+* 多个用例放到一个Test_xx的class里
+* test_01，test_02， test_03全部调用fixture里面的login功能
+* test_01测试登录用例
+* test_02和test_03执行前用if判断登录的结果，登录失败就执行，pytest.xfail(“登录不成功, 标记为xfail”)
+
+### 标记用例为预期失败
+
+我们可以使用`@pytest.mark.xfail`标记用例，表示期望这个用例执行失败；
+
+用例会正常执行，只是失败时不再显示堆栈信息，最终的结果有两个：用例执行失败时（XFAIL：符合预期的失败）、用例执行成功时（XPASS：不符合预期的成功）
+![](.01标记失败xfail_images/a28f44fb.png)
+另外，我们也可以通过pytest.xfail方法在用例执行过程中直接标记用例结果为XFAIL，并跳过剩余的部分：
+
+    def test_function():
+        if not valid_config():
+            pytest.xfail("failing configuration (but should work)")
+![](.01标记失败xfail_images/97f6c883.png)
+同样可以为pytest.xfail指定一个reason参数，表明原因；

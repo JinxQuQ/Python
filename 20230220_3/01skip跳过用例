@@ -11,3 +11,60 @@
 3.如果缺少某些导入，则跳过模块中的所有测试
 
 `pexpect = pytest.importorskip(“pexpect”)`
+
+## **[skip和xfail标记](https://blog.csdn.net/ifling99/article/details/124758905)**
+
+### 前言：
+
+实际工作中，测试用例的执行可能会依赖于一些外部条件\
+例如：只能运行在某个特定的操作系统（Windows），或者我们本身期望它们测试失败\
+例如：被某个已知的Bug所阻塞；如果我们能为这些用例提前打上标记，那么pytest就相应地预处理它们，并提供一个更加准确的测试报告；
+
+在这种场景下，常用的标记有：
+
+1. skip：只有当某些条件得到满足时，才执行测试用例，否则跳过整个测试用例的执行；例如，在非Windows平台上跳过只支持Windows系统的用例；
+2. xfail：因为一个确切的原因，我们知道这个用例会失败；例如，对某个未实现的功能的测试，或者阻塞于某个已知Bug的测试；
+
+         补充说明：
+         1.pytest默认不显示skip和xfail用例的详细信息，我们可以通过-r选项来自定义这种行为；
+         2.通常，我们使用一个字母作为一种类型的代表，具体的规则如下：
+             (f)ailed, (E)rror, (s)kipped, (x)failed, (X)passed, (p)assed, (P)assed with output, (a)ll except passed(p/P), or (A)ll
+         3.例如，显示结果为XFAIL、XPASS和SKIPPED的用例：
+             pytest -rxXs
+
+### @pytest.mark.skip装饰器
+
+跳过执行某个用例最简单的方式就是使用@pytest.mark.skip装饰器，并且可以设置一个可选参数reason，表明跳过的原因；
+
+    @pytest.mark.skip(reason="no way of currently testing this")
+    def test_the_unknown():
+        ...
+
+### pytest.skip方法
+
+如果我们想在测试执行期间（也可以在SetUp/TearDown期间）强制跳过后续的步骤，可以考虑pytest.skip()方法，它同样可以设置一个参数msg，表明跳过的原因；
+
+    def test_function():
+        if not valid_config():
+            pytest.skip("unsupported configuration")
+
+### 补充内容：
+    另外，我们还可以为其设置一个布尔型的参数allow_module_level（默认是False），表明是否允许在模块中调用这个方法，如果置为True，则跳过模块中剩余的部分；
+
+    例如，在Windows平台下，不测试这个模块：
+
+        import sys
+        import pytest
+ 
+    if not sys.platform.startswith("win"):
+         pytest.skip("skipping windows-only tests", allow_module_level=True)
+    注意：
+
+    当在用例中设置allow_module_level参数时，并不会生效；
+
+    def test_one(): pytest.skip("跳出", allow_module_level=True) def test_two(): assert 1
+
+    也就是说，在上述示例中，并不会跳过test_two用例；
+
+
+
