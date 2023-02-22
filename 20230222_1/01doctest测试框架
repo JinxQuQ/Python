@@ -1,0 +1,33 @@
+### 前言
+其为 Python 内置的文档测试库，你会发现很多 Python 内置库都使用了这个工具来做单元测试。你可以认为他**就是以注释文档的形式**来实现单元测试。\
+doctest 模块会搜索那些看起来像交互式会话的 Python 代码片段，然后尝试执行并验证结果![](.01doctest测试框架_images/59711fb6.png)
+
+### doctest测试用例可以放在两个地方
+
+* 函数或者方法下的注释里面
+* 模块的开头
+
+
+成功示例：
+![](.01doctest测试框架_images/91350daf.png)
+
+使用语句`python -m doctest -v test_01.py`执行（直接使用`python test_01.py`也可以）
+
+![](.01doctest测试框架_images/daabc854.png)
+
+失败示例：
+
+![](.01doctest测试框架_images/b795f45b.png)
+
+![](.01doctest测试框架_images/25e888f1.png)
+
+
+### doctest独立文件
+
+doctest内容也可以和代码抽离开，单独用一个.txt文件保存
+
+![](.01doctest测试框架_images/d012b00d.png)
+
+`python -m doctest -v doctest.txt`
+
+![](.01doctest测试框架_images/efff23e1.png)
