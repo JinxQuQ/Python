@@ -1,0 +1,15 @@
+### 安装pytest-xdist
+
+`pip install pytest-xdist`
+
+![](.01pytest-xdist-分布式执行_images/9140332d.png)
+
+pytest-xdist官网地址：【Home-page: https://github.com/pytest-dev/pytest-xdist】
+
+该pytest-xdist插件扩展了一些独特的测试执行模式pytest：
+
+1. 测试运行并行化：如果有多个CPU或主机，则可以将它们用于组合测试运行。会加快运行速度
+2. --looponfail：在子进程中重复运行测试。每次运行之后，pytest会等待，直到项目中的文件发生更改，然后重新运行以前失败的测试。重复此过程直到所有测试通过，之后再次执行完整运行。
+3. 多平台覆盖：您可以指定不同的Python解释器或不同的平台，并在所有平台上并行运行测试。
+4. 在远程运行测试之前，pytest有效地将您的程序源代码“rsyncs”到远程位置。报告所有测试结果并显示给您的本地终端。您可以指定不同的Python版本和解释器。
+
