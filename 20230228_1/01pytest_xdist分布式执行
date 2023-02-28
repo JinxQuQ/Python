@@ -1,0 +1,12 @@
+多cpu并行执行用例，直接加个-n参数即可，后面num参数就是并行数量，比如num设置为3
+
+    pytest -n 3
+
+如例：\
+不使用分布式（结合生成html报告进行测试）——运行时间约7s
+
+![](.01pytest_xdist分布式执行_images/8c188466.png)
+![](.01pytest_xdist分布式执行_images/3cd2fe1f.png)
+
+设置3CPU并行——运行时间缩短到了3.45s
+![](.01pytest_xdist分布式执行_images/5beef357.png)
